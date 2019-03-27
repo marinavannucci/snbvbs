@@ -20,8 +20,9 @@ We implemented the sparsity-inducing *spike-and-slab* prior and adaptive shrinka
 
 **The direct graph under the *spike-and-slab* setting is** 
 
-<img src="svgs/NegBinGraph.png" alt="drawing" width="500" align="center">
-
+<p align="center">
+<img src="svgs/NegBinGraph.png" alt="drawing" width="600" >
+</p>
 
 
 ## Installation
