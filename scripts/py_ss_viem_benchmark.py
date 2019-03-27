@@ -27,7 +27,7 @@ for rho in rhos:
     dir = "./benchmark/%s_rho_%3.2f" % (method, rho)
     if not os.path.exists(dir):
         os.makedirs(dir)
-    for file in glob.glob("./simulation/rho_%3.2f/*.pickle"%rho)[0:100]:
+    for file in glob.glob("./simulation/rho_%3.2f/*.pickle"%rho):
         negbin_dict = pickle.load(open(file, "rb" ))
         X = negbin_dict["X"]
         y = negbin_dict["y"]
