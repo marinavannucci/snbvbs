@@ -1,7 +1,5 @@
 # Scalable Bayesian Variable Selection for Negative Binomial Regression Models
 
-[TOC]
-
 ## Introduction
 We focus on Bayesian variable selection methods for regression models for count data, and specifically on the negative binomial  linear regression model. We first formulate a Bayesian hierarchical model with a variable selection *spike-and-slab* prior. For posterior inference, we review standard MCMC methods and also investigate a computationally more efficient approach using variational inference.
 
@@ -22,7 +20,7 @@ We implemented the sparsity-inducing *spike-and-slab* prior and adaptive shrinka
 
 **The direct graph under the *spike-and-slab* setting is** 
 
-<img src="svgs/NegBinGraph.png" alt="drawing" width="500" class="center">
+<img src="svgs/NegBinGraph.png" alt="drawing" width="500" align="center">
 
 
 
@@ -95,7 +93,7 @@ There are four modules from this package:
 - [x] NegBinSSVIEM (Variaional Inference EM with the *spike-and-slab* prior)
 - [x] parNegBinSSVIIS (Variaional Inference EM and Importance Sampling with the *spike-and-slab* prior)
 
-You can copy the **csnbvbs** file  to the scripts folder and perform the benchmark test:
+You can copy the **csnbvbs** file  to the scripts folder and perform the following benchmark test:
 
 Simulate n = 100, p = 50 with various model sparsity and correlation measure rho.
 ```bash
@@ -106,7 +104,7 @@ After running the above, you will find a simulation folder with 100 examples per
 
 ```shell
 python py_ss_mcmc_benchmark.py # spike and spike mcmc sampling
-python py_hs_benchmark.py	   # horseshoe mcmc sampling
+python py_hs_benchmark.py      # horseshoe mcmc sampling
 pyhton py_ss_viem_benchmark.py # variational inference EM
 pyhton py_ss_viss_benchmark.py # variational inference EM with importance smapling
 ```
