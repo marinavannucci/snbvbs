@@ -1,10 +1,12 @@
 
-from cpolyagamma import test, digamma, NegBinHS
+from csnbvbs import test, NegBinHS
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
 from sklearn.metrics import roc_curve, auc
 from scipy import interp
 from metrics import comp_performance
 import numpy as np
-import matplotlib.pyplot as plt
 import pickle
 import glob
 import os

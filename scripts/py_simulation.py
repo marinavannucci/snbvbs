@@ -1,6 +1,5 @@
-
 import numpy as np
-from numpy import tanh, exp, diag, ones, zeros
+from numpy import tanh, exp, diag, ones
 from numpy.random import normal, multivariate_normal, uniform, gamma, poisson, binomial, seed
 import pickle
 import matplotlib.pyplot as plt
@@ -27,7 +26,7 @@ def sigmoid(eta):
     return 1 / (1 + exp(-eta))
 
 
-def simulation(rng_seed, n, p, tp, rho):
+def simulation(rng_seed, n, p, rho):
     """
     :param rng_seed: random seed
     :param n:        number of samples
@@ -37,29 +36,21 @@ def simulation(rng_seed, n, p, tp, rho):
     print("Simulate negative binomial counts regression\n n=%d, p=%d, rho=%3.2f" % (n, p, rho))
     seed(rng_seed)
 
+    X_mu = normal(0, .1, p)
+    #X_Sigma = diag(ones(p))
+
     # simulate correlated matrix
-    X_mu1 = normal(0, .1, p)
     temp = np.abs(np.repeat([range(1, p+1)], p, axis=0).transpose() - np.repeat([range(1, p+1)], p, axis=0))
-    X_Sigma1 = np.power(rho, temp)
+    X_Sigma = np.power(rho, temp)
 
-    # simulate independent matrix
-    X_mu2 = zeros(tp - p)
-    X_Sigma2 = diag(ones(tp - p))
-
-    # draw correlated samples from MVN(X_mu1, X_Sigma1)
-    X1 = multivariate_normal(X_mu1, X_Sigma1, n)
-
-    # draw independent samples from MVN(X_mu2, X_Sigma2)
-    X2 = multivariate_normal(X_mu2, X_Sigma2, n)
-
-    # concatenate X1 and X2
-    X = np.hstack((X1, X2))
+    # draw independent samples from MVN(X_mu, X_Sigma)
+    X = multivariate_normal(X_mu, X_Sigma, n)
 
     # sample from bernoulli and uniform for coefficient beta and model space gamma
-    opt_gamma = np.append(binomial(1, 0.15, p), zeros(tp - p))  # model gamma
-    opt_beta = np.append(uniform(-2, 2, p), zeros(tp - p))  # model coefficient
+    opt_gamma = binomial(1, 0.15, p)  # model gamma
+    opt_beta = uniform(-2, 2, p)
     # drop all elements in beta whose absolute value less than 0.5
-    opt_gamma *= abs(opt_beta) > 0.5 
+    opt_gamma &= abs(opt_beta) > 0.5 
     opt_beta *= opt_gamma  # coefficients
     opt_beta0 = 2  # bias
     opt_r = 1  # over-dispersion parameter
@@ -80,23 +71,19 @@ def simulation(rng_seed, n, p, tp, rho):
 
 if __name__ == "__main__":
     # generate random negative binomial regression
-    n = 200
+    n = 100
     p = 50
-    tp = 1000
-    rho = 0.9
-    dir = "./simulation/rho_%3.2f" % rho
-    if not os.path.exists(dir):
-        os.makedirs(dir)
-    for ran_seed in range(1, 100, 1):
-        try:
-            simulation_dict = simulation(ran_seed, n, p, tp, rho)
-        except:
-            pass
-        if sum(simulation_dict["opt_gamma"]) == 0 or sum(simulation_dict["opt_gamma"]) > 10:
-            continue
-        print("seed: %d"%ran_seed)
-        # dump that into pickle file
-        pickle.dump(simulation_dict, open("./simulation/rho_%3.2f/negbin_simu_%d_rho_%3.2f.pickle" % (rho, ran_seed, rho), "wb"), protocol=2)
-        #print(simulation_dict["opt_gamma"])
-        #print(simulation_dict["opt_beta"])
-        print(simulation_dict["opt_model"])
+    for rho in [0.0, 0.3, 0.6, 0.9]:
+        dir = "./simulation/rho_%3.2f" % rho
+        if not os.path.exists(dir):
+            os.makedirs(dir)
+        for ran_seed in range(100):
+            try:
+                simulation_dict = simulation(ran_seed, n, p, rho)
+            except:
+                pass
+            if sum(simulation_dict["opt_gamma"]) == 0 or sum(simulation_dict["opt_gamma"]) > 10:
+                continue
+            print("seed: %d"%ran_seed)
+            # dump that into pickle file
+            pickle.dump(simulation_dict, open("./simulation/rho_%3.2f/negbin_simu_%d_rho_%3.2f.pickle" % (rho, ran_seed, rho), "wb"))

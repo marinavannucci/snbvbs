@@ -20,9 +20,9 @@ We implemented the sparsity-inducing *spike-and-slab* prior and adaptive shrinka
 **The priors on the other parameters are given as**
 <p align="center"><img alt="$$&#10;\begin{align}&#10;\beta_{0} &amp; \sim \text{Normal}\left(0,\tau_{\beta_{0}}^{-1}\right) &amp;&amp; \text{ where }\tau_{\beta_{0}}^{-1}=\sigma_{\beta_{0}}^{2}, \\&#10;r &amp; \sim\text{Gamma}\left(a_{r},b_{r}\right), \nonumber\\&#10;\sigma_{\beta}^{2}&amp;\sim\text{Scaled-Inv-}\chi^{2}\left(\nu_{0},\sigma_{0}^{2}\right)\nonumber.&#10;\end{align}&#10;$$" src="svgs/322705e6cc02ea0b930348f40cbc82aa.svg" align="middle" width="349.73410064999996pt" height="82.97011964999999pt"/></p>
 
-The direct graph of the *spike-and-slab* setting is 
+**The direct graph under the *spike-and-slab* setting is** 
 
-<img src="svgs/NegBinGraph.png" alt="drawing" width="500"/>
+<img src="svgs/NegBinGraph.png" alt="drawing" width="500" class="center">
 
 
 
@@ -39,7 +39,7 @@ Our code is written in C/C++ and use the pybind11 to expose the C++ to Python. W
 - [x] [GSL](https://www.gnu.org/software/gsl/)
 - [x] [Eigen](http://eigen.tuxfamily.org/index.php?title=Main_Page)
 
-Configuring those can be a pain but don't worry. I will walk you through the process in detail. For the following tutorial, I will use **Ubuntu** as an example. For the other Linux based system such as macOS or Red Hat, the process should be similar. But the process for setting up the environment in Windows is more confusing and you might need to install [Microsoft Visual Studio](https://visualstudio.microsoft.com/) and its package manager [vcpkg](https://github.com/Microsoft/vcpkg). However, I am currently working on an R package that can hopefully solve the compatibility issues with the Windows. Please visit again and check our R package later.
+Configuring those can be a pain but don't worry. I will walk you through the process in detail. For the following tutorial, I will use **Ubuntu** as an example. For the other Linux based system such as macOS or Red Hat, the process should be similar. But the process for setting up the environment in Windows is more confusing and you might need to install [Microsoft Visual Studio](https://visualstudio.microsoft.com/) and its package manager [vcpkg](https://github.com/Microsoft/vcpkg). However, I am currently working on an R package that can hopefully solve the compatibility issues with the Windows. Please visit us again and check our R package in the future.
 
 **Install Python**
 
@@ -66,24 +66,47 @@ sudo apt-get update
 sudo apt-get install cmake
 ```
 **Install GSL**
+
 ```shell
 sudo apt-get install libgsl-dev
 ```
 
 **Install Eigen**
+
 ```shell
 sudo apt-get install libeigen3-dev
 ```
 
 **Compile csnbvbs**
+
 ```shell
 cmake . -DCMAKE_BUILD_TYPE=Release
+make
 ```
-Copy the **csnbvbs** to the directory you would like to import as a python package.
+You will find a file named **csnbvbs.cpython-36m-x86_64-linux-gnu.so ** in the current directory. 
+Copy the **csnbvbs**file  to the directory that you are working with. You are ready to import it as a regular python package. Congratulations!
+
+## Example
+
+There are four modules from this package:
+
+- [x] NegBinHS (MCMC version with the horseshoe prior)
+- [x] NegBinSSMCMC (MCMC version with the *spike-and-slab* prior)
+- [x] NegBinSSVIEM (Variaional Inference EM with the *spike-and-slab* prior)
+- [x] parNegBinSSVIIS (Variaional Inference EM and Importance Sampling with the *spike-and-slab* prior)
+
+You can copy the **csnbvbs** file  to the scripts folder and perform the benchmark test:
+
+Simulate n = 100, p = 50 with various model sparsity and correlation measure rho.
+```bash
+python py_simulation.py
+```
+After running the above, you will find a simulation folder with 100 examples per rho. You then can perform benchmark testing among the four methods by 
 
 
-
-
-
-
-
+```shell
+python py_ss_mcmc_benchmark.py # spike and spike mcmc sampling
+python py_hs_benchmark.py	   # horseshoe mcmc sampling
+pyhton py_ss_viem_benchmark.py # variational inference EM
+pyhton py_ss_viss_benchmark.py # variational inference EM with importance smapling
+```
