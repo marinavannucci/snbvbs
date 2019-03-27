@@ -19,7 +19,7 @@ precisions = []
 recalls = []
 F1s = []
 mean_fpr = np.linspace(0, 1, 100)
-rhos = [0.3]
+rhos = [0.0, 0.3, 0.6, 0.9]
 method = "ss_viem_is"
 
 for rho in rhos:
