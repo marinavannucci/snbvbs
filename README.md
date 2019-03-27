@@ -21,7 +21,7 @@ We implemented the sparsity-inducing *spike-and-slab* prior and adaptive shrinka
 **The direct graph under the *spike-and-slab* setting is** 
 
 <p align="center">
-<img src="svgs/NegBinGraph.png" alt="drawing" width="600" >
+<img src="svgs/NegBinGraph.png" alt="drawing" width="460" >
 </p>
 
 
@@ -96,7 +96,7 @@ There are four modules from this package:
 
 You can copy the **csnbvbs** file  to the scripts folder and perform the following benchmark test:
 
-Simulate n = 100, p = 50 with various model sparsity and correlation measure rho.
+Simulate n = 200, p = 50 with various model sparsity and correlation measure rho.
 ```bash
 python py_simulation.py
 ```

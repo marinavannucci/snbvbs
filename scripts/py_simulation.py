@@ -71,7 +71,7 @@ def simulation(rng_seed, n, p, rho):
 
 if __name__ == "__main__":
     # generate random negative binomial regression
-    n = 100
+    n = 200
     p = 50
     for rho in [0.0, 0.3, 0.6, 0.9]:
         dir = "./simulation/rho_%3.2f" % rho
