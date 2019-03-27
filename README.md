@@ -8,11 +8,12 @@ We focus on Bayesian variable selection methods for regression models for count 
 The negative binomial regression is specified as the following given 
 
 
-<p align="center"><img alt="$$&#10;\begin{align}&#10;\begin{split}&#10;y_{i} \mid r, \psi_{i} &amp;\sim\text{NB}\left(r,\frac{\exp (\psi_{i})}{1+\exp (\psi_{i})}\right), \\&#10;\psi_{i}  &amp; =\beta_{0}+{\boldsymbol{x}}_{i}^{T}{\boldsymbol{\beta}}. &#10;\end{split}&#10;\end{align}&#10;$$" src="svgs/eb8f89e1e1375c7862f8a0a3cb679979.svg" valign=0.0px width="238.41509009999996pt" height="64.7419245pt"/></p>
+<p align="center"><img alt="$$&#10;\begin{align}&#10;\begin{split}&#10;y_{i} \mid r, \psi_{i} &amp;\sim\text{NB}\left(r,\frac{\exp (\psi_{i})}{1+\exp (\psi_{i})}\right), \\&#10;\psi_{i}  &amp; =\beta_{0}+{\boldsymbol{x}}_{i}^{T}{\boldsymbol{\beta}}. &#10;\end{split}&#10;\end{align}&#10;$$" src="svgs/eb8f89e1e1375c7862f8a0a3cb679979.svg" align="middle" width="238.41509009999996pt" height="64.7419245pt"/></p>
 
-where we consider a sparsity-inducing prior known as the *spike-and-slab* prior as,
-<p align="center"><img alt="$$&#10;\begin{align}&#10;\beta_{k}\mid\gamma_{k} \sim\gamma_{k}\text{Normal}\left(0,\sigma_{\beta}^{2}\right)+\left(1-\gamma_{k}\right)\delta_{0},\quad k=1,\cdots,p,&#10;\end{align}&#10;$$" src="svgs/77eb4acc988d1e41d7674cd88ec0442c.svg" valign=0.0px width="401.53105079999995pt" height="20.50407645pt"/></p>
-where <img alt="$\gamma_{k}$" src="svgs/0be70542d78d255d114877bcf3e2b091.svg" valign=-3.1963502999999895px width="15.77667134999999pt" height="14.15524440000002pt"/> is the latent indicator variable of whether the k-th covariate has a nonzero effect on the outcome, <img alt="$\delta_{0}$" src="svgs/e4d57a6b757d7da2ca852e9d5d1ceee6.svg" valign=-2.4657286500000066px width="13.858486949999989pt" height="22.831056599999986pt"/> is a point mass distribution at 0, and <img alt="$\sigma_{\beta}^{2}$" src="svgs/c5b9a9fd5941f24be0e2dbdae5d496d2.svg" valign=-6.892939350000008px width="17.43826424999999pt" height="26.76175259999998pt"/> is the variance of the prior effect size.
+where we consider a sparsity-inducing prior known as the *spike-and-slab* prior and use the following hierarchical priors:
+
+<p align="center"><img alt="$$&#10;\begin{align}&#10;\beta_{k}\mid\gamma_{k} &amp; \sim\gamma_{k}\underbrace{\text{Normal}\left(0,\sigma_{\beta}^{2}\right)}_{\text{slab}}+\left(1-\gamma_{k}\right)\underbrace{\delta_{0}}_{\text{spike}} &amp;&amp; \text{ where }k=\left\{ 1,2,\cdots,p\right\}, \nonumber \\&#10;\gamma_{k} &amp; \sim\text{Bernoulli}\left(\pi\right) &amp;&amp; \text{ where }\pi\in\left[0,1\right],  \nonumber\\&#10;\beta_{0} &amp; \sim \text{Normal}\left(0,\tau_{\beta_{0}}^{-1}\right) &amp;&amp; \text{ where }\tau_{\beta_{0}}^{-1}=\sigma_{\beta_{0}}^{2}, \\&#10;r &amp; \sim\text{Gamma}\left(a_{r},b_{r}\right), \nonumber\\&#10;\sigma_{\beta}^{2}&amp;\sim\text{Scaled-Inv-}\chi^{2}\left(\nu_{0},\sigma_{0}^{2}\right)\nonumber .&#10;\end{align}&#10;&#10;$$" src="svgs/61bea44b8f4e56a5949bee507b0991d0.svg" align="middle" width="497.76412454999996pt" height="160.5608235pt"/></p>
+
 
 
 ## Install Software
