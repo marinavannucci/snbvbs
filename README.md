@@ -1,7 +1,7 @@
 # Scalable Bayesian Variable Selection for Negative Binomial Regression Models
 
 ## Introduction
-We focus on Bayesian variable selection methods for regression models for count data, and specifically on the negative binomial  linear regression model. We first formulate a Bayesian hierarchical model with a variable selection *spike-and-slab* prior. For posterior inference, we review standard MCMC methods and investigate a computationally more efficient approach using variational inference. We also compare performance of the spike-and-slab prior versus an adaptive shrinkage prior such as the horseshoe prior.
+We focus on Bayesian variable selection methods for regression models for count data, and specifically on the negative binomial  linear regression model. We first formulate a Bayesian hierarchical model with a variable selection *spike-and-slab* prior. For posterior inference, we review standard MCMC methods and investigate a computationally more efficient approach using variational inference. We also compare performance of the *spike-and-slab* prior versus an adaptive shrinkage prior such as the horseshoe prior.
 
 The negative binomial regression is specified as the following given 
 
@@ -82,7 +82,7 @@ sudo apt-get install libeigen3-dev
 cmake . -DCMAKE_BUILD_TYPE=Release
 make
 ```
-You will find a file named **csnbvbs.cpython-36m-x86_64-linux-gnu.so ** in the current directory. 
+You will find a file named **csnbvbs.cpython-36m-x86_64-linux-gnu.so** in the current directory. 
 Copy the **csnbvbs**file  to the directory that you are working with. You are ready to import it as a regular python package. Congratulations!
 
 ## Example
@@ -94,7 +94,7 @@ There are four modules from this package:
 - [x] NegBinSSVIEM (Variaional Inference EM with the *spike-and-slab* prior)
 - [x] parNegBinSSVIIS (Variaional Inference EM and Importance Sampling with the *spike-and-slab* prior)
 
-You can copy the **csnbvbs** file  to the scripts folder and perform the following benchmark test:
+You can copy the **csnbvbs** file to the scripts folder and perform the following benchmark test:
 
 Simulate n = 200, p = 50 with various model sparsity and correlation measure rho.
 ```bash
@@ -107,5 +107,5 @@ After running the above, you will find a simulation folder with 100 examples per
 python py_ss_mcmc_benchmark.py # spike and spike mcmc sampling
 python py_hs_benchmark.py      # horseshoe mcmc sampling
 pyhton py_ss_viem_benchmark.py # variational inference EM
-pyhton py_ss_viss_benchmark.py # variational inference EM with importance smapling
+pyhton py_ss_viss_benchmark.py # variational inference EM with importance sampling
 ```
