@@ -1,7 +1,7 @@
 # Scalable Bayesian Variable Selection for Negative Binomial Regression Models
 
 ## Introduction
-We focus on Bayesian variable selection methods for regression models for count data, and specifically on the negative binomial  linear regression model. We first formulate a Bayesian hierarchical model with a variable selection *spike-and-slab* prior. For posterior inference, we review standard MCMC methods and also investigate a computationally more efficient approach using variational inference.
+We focus on Bayesian variable selection methods for regression models for count data, and specifically on the negative binomial  linear regression model. We first formulate a Bayesian hierarchical model with a variable selection *spike-and-slab* prior. For posterior inference, we review standard MCMC methods and investigate a computationally more efficient approach using variational inference. We also compare performance of the spike-and-slab prior versus an adaptive shrinkage prior such as the horseshoe prior.
 
 The negative binomial regression is specified as the following given 
 
