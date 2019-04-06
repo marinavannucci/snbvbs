@@ -21,7 +21,7 @@ We implemented the sparsity-inducing *spike-and-slab* prior and adaptive shrinka
 **The direct graph under the *spike-and-slab* setting is** 
 
 <p align="center">
-<img src="svgs/NegBinGraph.png" alt="drawing" width="460" >
+<img src="svgs/NegBinGraph.svg" alt="NegBinGraph" width="600" >
 </p>
 
 
@@ -109,3 +109,11 @@ python py_hs_benchmark.py      # horseshoe mcmc sampling
 pyhton py_ss_viem_benchmark.py # variational inference EM
 pyhton py_ss_viss_benchmark.py # variational inference EM with importance sampling
 ```
+
+
+
+### MCMC Implementations
+
+1. [Horseshoe MCMC](tutorial/horseshoe.md)
+2. 
+
