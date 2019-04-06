@@ -12,7 +12,8 @@ We implemented the sparsity-inducing *spike-and-slab* prior and adaptive shrinka
 **The hierarchical priors are specified for the *spike-and-slab* setting:**
 <p align="center"><img alt="$$&#10;\begin{align}&#10;\beta_{k}\mid\gamma_{k} &amp; \sim\gamma_{k}\underbrace{\text{Normal}\left(0,\sigma_{\beta}^{2}\right)}_{\text{slab}}+\left(1-\gamma_{k}\right)\underbrace{\delta_{0}}_{\text{spike}} &amp;&amp; \text{ where }k=\left\{ 1,2,\cdots,p\right\}, \nonumber \\&#10;\gamma_{k} &amp; \sim\text{Bernoulli}\left(\pi\right) &amp;&amp; \text{ where }\pi\in\left[0,1\right].  \nonumber\\&#10;\end{align}&#10;$$" src="svgs/5acaefa81f8b07a33af427ff8cd8feac.svg" align="middle" width="497.76412454999996pt" height="69.20710005pt"/></p>
 
-**The hierarchical priors are specified for the *horseshoe* setting:**
+**The hierarchical priors are specified for the [*horseshoe*](horseshoe.md) setting:**
+
 <p align="center"><img alt="$$&#10;\begin{align}&#10;\left[\beta_{k}\mid\lambda_{k}\right] &amp; \overset{\text{indep}}{\sim}\text{Normal}\left(0,\lambda_{k}^{2}\right),\nonumber \\&#10;\left[\lambda_{k}\mid A\right] &amp; \overset{\text{iid}}{\sim}C^{+}\left(0,A\right),\nonumber\\&#10;A &amp; \sim\text{Uniform}\left(0,10\right).\nonumber &#10;\end{align}&#10;$$" src="svgs/3f559bab33930a1c0dc89b6d9666554f.svg" align="middle" width="210.1598532pt" height="78.2990802pt"/></p>
 
 **The priors on the other parameters are given as**
@@ -109,11 +110,3 @@ python py_hs_benchmark.py      # horseshoe mcmc sampling
 pyhton py_ss_viem_benchmark.py # variational inference EM
 pyhton py_ss_viss_benchmark.py # variational inference EM with importance sampling
 ```
-
-
-
-### MCMC Implementations
-
-1. [Horseshoe MCMC](tutorial/horseshoe.md)
-2. 
-
